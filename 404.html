@@ -1,26 +1,301 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 | System Not Found</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230f172a'/><path d='M8 10l6 6-6 6' fill='none' stroke='%23ef4444' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><line x1='16' y1='22' x2='24' y2='22' stroke='%23ef4444' stroke-width='2.5' stroke-linecap='round'/></svg>">
+  <title>404 — Page Not Found | Wafy Lab</title>
+  <meta name="description" content="The page you're looking for doesn't exist or has been moved. Return to Wafy Lab's project laboratory.">
+  <meta name="robots" content="noindex, follow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
   <style>
+    /* 404-specific styles */
+    .error-container {
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .error-code {
+      font-family: var(--mono);
+      font-size: clamp(6rem, 15vw, 12rem);
+      font-weight: 500;
+      color: var(--acid);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 80px rgba(215,255,67,.08);
+    }
+
+    .error-label {
+      font-family: var(--mono);
+      font-size: clamp(0.8rem, 1.5vw, 1rem);
+      letter-spacing: 0.3em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .error-container h1 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .error-message {
+      color: var(--muted);
+      font-size: clamp(1rem, 1.2vw, 1.2rem);
+      line-height: 1.8;
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .error-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--line);
+      margin: 0 auto 2.5rem;
+    }
+
+    .error-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+
+    .error-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.9rem 2rem;
+      background: var(--acid);
+      color: var(--bg);
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      transition: all 0.25s ease;
+    }
+
+    .error-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(215,255,67,.2);
+    }
+
+    .error-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.9rem 2rem;
+      border: 1px solid var(--line);
+      color: var(--text);
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      transition: all 0.25s ease;
+    }
+
+    .error-btn-secondary:hover {
+      border-color: var(--acid);
+      color: var(--acid);
+    }
+
+    .error-suggestions {
+      border-top: 1px solid var(--line);
+      padding-top: 2.5rem;
+      margin-top: 1rem;
+    }
+
+    .error-suggestions p {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--dim);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .error-suggestions-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+    }
+
+    .error-suggestions-list a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      transition: all 0.2s ease;
+    }
+
+    .error-suggestions-list a:hover {
+      color: var(--acid);
+      border-color: var(--acid);
+    }
+
+    .error-footer {
+      margin-top: 3rem;
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      color: var(--dim);
+    }
+
+    .error-footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .error-footer a:hover {
+      color: var(--text);
+    }
+
     body {
-      background: #0f172a; color: #f8fafc; font-family: 'Courier New', Courier, monospace;
-      height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0; text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      position: relative;
     }
-    h1 { color: #ef4444; font-size: 3rem; margin-bottom: 0.5rem; }
-    p { color: #94a3b8; margin-bottom: 2rem; font-size: 1.1rem; }
-    a {
-      color: #10b981; text-decoration: none; border: 1px solid #10b981; padding: 0.75rem 1.5rem; border-radius: 6px; transition: all 0.2s;
+
+    .error-orbits {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      display: grid;
+      place-items: center;
     }
-    a:hover { background: rgba(16, 185, 129, 0.1); }
+
+    .orbit-ring {
+      position: absolute;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      animation: spin linear infinite;
+    }
+
+    .orbit-ring:nth-child(1) {
+      width: 70%;
+      height: 70%;
+      animation-duration: 30s;
+    }
+
+    .orbit-ring:nth-child(2) {
+      width: 50%;
+      height: 50%;
+      border-color: rgba(215,255,67,.12);
+      animation-duration: 20s;
+      animation-direction: reverse;
+    }
+
+    .orbit-ring:nth-child(3) {
+      width: 30%;
+      height: 30%;
+      animation-duration: 14s;
+    }
+
+    .orbit-ring::after {
+      content: "";
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--acid);
+      border-radius: 50%;
+      top: -2px;
+      left: 50%;
+      box-shadow: 0 0 12px var(--acid);
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 640px) {
+      .error-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+      .error-btn-primary,
+      .error-btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>[ERR_404]</h1>
-  <p>System resource not found or access denied.</p>
-  <a href="/">← Return to Main Console</a>
+  <div class="noise" aria-hidden="true"></div>
+  
+  <div class="error-orbits" aria-hidden="true">
+    <div class="orbit-ring"></div>
+    <div class="orbit-ring"></div>
+    <div class="orbit-ring"></div>
+  </div>
+
+  <div class="error-container">
+    <div class="error-code">404</div>
+    <div class="error-label">Page Not Found</div>
+
+    <h1>This page<br>doesn't exist.</h1>
+    
+    <p class="error-message">
+      Either the URL was mistyped, the page was moved, or it never existed in the first place. 
+      The lab is still open — just not here.
+    </p>
+
+    <div class="error-divider"></div>
+
+    <div class="error-actions">
+      <a href="/" class="error-btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1"/>
+        </svg>
+        Return to Lab
+      </a>
+      <a href="https://afeemuhammodwafy.com/" target="_blank" rel="noopener" class="error-btn-secondary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 17L17 7"></path>
+          <path d="M8 7h9v9"></path>
+        </svg>
+        Portfolio
+      </a>
+    </div>
+
+    <div class="error-suggestions">
+      <p>Try one of these builds</p>
+      <div class="error-suggestions-list">
+        <a href="https://shield.amwafy.xyz/" target="_blank">WafyShield</a>
+        <a href="https://url.amwafy.xyz/" target="_blank">WafyURL</a>
+        <a href="https://afeemuhammodwafy1.github.io/wafydev/" target="_blank">WafyDev</a>
+        <a href="https://astro.amwafy.xyz/" target="_blank">AstroWafy</a>
+      </div>
+    </div>
+
+    <div class="error-footer">
+      <span>WAFY LAB</span>
+      <span> — BUILT TO EXPERIMENT</span>
+    </div>
+  </div>
 </body>
 </html>
