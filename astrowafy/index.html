@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AstroWafy — Case Study & API Architecture | Wafy Lab</title>
+  <meta name="description" content="Technical case study of AstroWafy: An educational exploration interface integrating NASA APOD APIs, dual English-Bengali translation pipelines, and direct Blob image streams.">
+  <link rel="canonical" href="https://amwafy.xyz/astrowafy">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b0b'/%3E%3Cpath d='M18 17h28v8H34v22h-9V25H18z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="../index.html" aria-label="Wafy Lab home">
+      <span>Wafy Lab</span>
+    </a>
+    <nav>
+      <a href="../index.html#builds">Builds</a>
+      <a href="../index.html#process">Process</a>
+      <a href="https://afeemuhammodwafy.com/" target="_blank" rel="noopener">Portfolio</a>
+    </nav>
+    <span class="status"><i></i> LAB ONLINE</span>
+  </header>
+
+  <main>
+    <section class="cs-header">
+      <a href="../index.html#builds" class="cs-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        Back to builds
+      </a>
+
+      <div class="cs-title-wrap">
+        <p class="kicker"><span>API INTEGRATION & LOCALIZATION</span> / BUILD 04</p>
+        <h1>AstroWafy</h1>
+        <p class="lede">An astronomy web application interfacing directly with NASA Open APIs, integrating real-time bilingual translation caches and cross-origin media download pipelines.</p>
+      </div>
+
+      <div class="cs-meta-bar">
+        <span>DATA SOURCE: <strong>NASA Open APIs (APOD)</strong></span>
+        <span>LOCALIZATION: <strong>English & Bengali (i18n)</strong></span>
+        <span>MEDIA PIPELINE: <strong>Blob Streams & CORS Fallbacks</strong></span>
+        <span>STATUS: <strong>Live Web Experience</strong></span>
+
+        <div class="cs-btn-row">
+          <a href="https://astro.amwafy.xyz/" target="_blank" rel="noopener" class="cs-btn primary">
+            Launch Experience
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+          <a href="https://github.com/afeemuhammodwafy1/astro" target="_blank" rel="noopener" class="cs-btn secondary">
+            GitHub Repository
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-hero-media">
+      <div class="cs-image-frame">
+        <img src="../assets/images/astrowafy.webp" alt="AstroWafy NASA Interface with Bilingual Display" loading="eager">
+      </div>
+    </section>
+
+    <div class="cs-body">
+      <aside class="cs-aside">
+        <div class="cs-aside-block">
+          <h4>Table of Contents</h4>
+          <ul class="cs-nav-list">
+            <li><a href="#overview">Vision & Scientific Purpose</a></li>
+            <li><a href="#nasa">NASA APOD Integration</a></li>
+            <li><a href="#i18n">Bilingual Pipeline & Caching</a></li>
+            <li><a href="#media">Media Handlers & Blob Streams</a></li>
+            <li><a href="#takeaways">Lessons & Boundary Conditions</a></li>
+          </ul>
+        </div>
+
+        <div class="cs-aside-block">
+          <h4>Key Technologies</h4>
+          <div class="cs-tag-cloud">
+            <span>NASA APOD REST API</span>
+            <span>Client-Side i18n</span>
+            <span>Fetch Blob API</span>
+            <span>Object URL Generation</span>
+            <span>Responsive Video Aspect Ratio</span>
+          </div>
+        </div>
+      </aside>
+
+      <article class="cs-article">
+        <section id="overview" class="cs-section">
+          <p class="micro">01 / CONCEPT & MOTIVATION</p>
+          <h2>Democratizing Astronomical Discoveries</h2>
+          <p>NASA's Astronomy Picture of the Day (APOD) represents one of the most comprehensive public scientific archives on Earth. However, native access is constrained by legacy website layouts and lack of multi-language accessibility for regional science students.</p>
+          <p><strong>AstroWafy</strong> was engineered to bridge this gap: a streamlined, dark-mode cosmic viewport pairing high-resolution space photography with client-side localization into Bengali, interactive date-travel controls, and direct image acquisition.</p>
+        </section>
+
+        <section id="nasa" class="cs-section">
+          <p class="micro">02 / DATA INTEGRATION</p>
+          <h2>REST Protocol Handling & Temporal Queries</h2>
+          <p>The client orchestrates asynchronous HTTP requests directly to the NASA planetary endpoint using API key authentication. A native date selection calendar allows users to travel through archival records dating back to APOD's launch in 1995.</p>
+        </section>
+
+        <section id="i18n" class="cs-section">
+          <p class="micro">03 / LOCALIZATION ARCHITECTURE</p>
+          <h2>Bilingual Translation Pipeline & In-Memory Cache</h2>
+          <ul>
+            <li><strong>Race Condition Guards:</strong> Fast date switching can cause asynchronous translation callbacks to resolve out of order. Validation checks verify that incoming data matches active date states before manipulating the DOM.</li>
+            <li><strong>In-Memory Cache Hash:</strong> Translated scientific terminology is mapped to date keys (<code>YYYY-MM-DD_bn</code>), eliminating redundant network calls when toggling repeatedly between English and Bengali.</li>
+          </ul>
+        </section>
+
+        <section id="media" class="cs-section">
+          <p class="micro">04 / ASSET EXTRACTION</p>
+          <h2>Binary Blob Streaming & HD Downloads</h2>
+          <p>Browsers normally open external image links in a new tab instead of saving them locally due to cross-origin headers. AstroWafy solves this through a custom download pipeline:</p>
+          <div class="cs-code-box">
+Fetch Binary Stream -> Convert to Blob -> Create Object URL -> Inject Anchored Download
+          </div>
+        </section>
+
+        <section id="takeaways" class="cs-section">
+          <p class="micro">05 / RETROSPECTIVE</p>
+          <h2>Engineering Takeaways</h2>
+          <p>Building AstroWafy demonstrated the importance of designing resilient user experiences around third-party rate-limited APIs with graceful error state handling and smooth CSS transitions.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <span>WAFY LAB</span>
+    <span>BUILT TO EXPERIMENT</span>
+    <a href="https://afeemuhammodwafy.com/" target="_blank" rel="noopener">afeemuhammodwafy.com</a>
+  </footer>
+</body>
+</html>

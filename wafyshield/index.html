@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WafyShield — Case Study & Technical Architecture | Wafy Lab</title>
+  <meta name="description" content="Technical case study of WafyShield: A serverless zero-database web security scanner inspecting HTTPS, OWASP security headers, and cookie attributes.">
+  <link rel="canonical" href="https://amwafy.xyz/wafyshield">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b0b'/%3E%3Cpath d='M18 17h28v8H34v22h-9V25H18z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Wafy Lab home">
+      <span>Wafy Lab</span>
+    </a>
+    <nav>
+      <a href="/#builds">Builds</a>
+      <a href="/#process">Process</a>
+      <a href="https://afeemuhammodwafy.com/" target="_blank" rel="noopener">Portfolio</a>
+    </nav>
+    <span class="status"><i></i> LAB ONLINE</span>
+  </header>
+
+  <main>
+    <section class="cs-header">
+      <a href="/#builds" class="cs-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        Back to builds
+      </a>
+
+      <div class="cs-title-wrap">
+        <p class="kicker"><span>SECURITY ARCHITECTURE</span> / BUILD 01</p>
+        <h1>WafyShield</h1>
+        <p class="lede">A serverless, non-intrusive web security audit scanner engineering real-time perimeter checks, OWASP compliance scoring, and zero-persistence runtime isolation.</p>
+      </div>
+
+      <div class="cs-meta-bar">
+        <span>DOMAIN: <strong>Web Security</strong></span>
+        <span>ENGINE: <strong>Next.js / Node TLS</strong></span>
+        <span>HOSTING: <strong>Vercel Serverless</strong></span>
+        <span>TIMELINE: <strong>2025 – 2026</strong></span>
+
+        <div class="cs-btn-row">
+          <a href="https://shield.amwafy.xyz/" target="_blank" rel="noopener" class="cs-btn primary">
+            Live Scanner
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+          <a href="https://github.com/afeemuhammodwafy1" target="_blank" rel="noopener" class="cs-btn secondary">
+            Source Code
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-hero-media">
+      <div class="cs-image-frame">
+        <img src="../assets/images/wafyshield.webp" alt="WafyShield Security Scanner Dashboard and Interface" loading="eager">
+      </div>
+    </section>
+
+    <div class="cs-body">
+      <aside class="cs-aside">
+        <div class="cs-aside-block">
+          <h4>Table of Contents</h4>
+          <ul class="cs-nav-list">
+            <li><a href="#overview">Problem & Objective</a></li>
+            <li><a href="#ssrf">SSRF & Network Shield</a></li>
+            <li><a href="#engine">Inspection Pipeline</a></li>
+            <li><a href="#scoring">Weighted Algorithm</a></li>
+            <li><a href="#takeaways">Lessons & Hardening</a></li>
+          </ul>
+        </div>
+
+        <div class="cs-aside-block">
+          <h4>Core Tech Stack</h4>
+          <div class="cs-tag-cloud">
+            <span>Next.js 14</span>
+            <span>React 18</span>
+            <span>Node.js TLS</span>
+            <span>OWASP Standards</span>
+            <span>Serverless Functions</span>
+            <span>In-Memory Cache</span>
+          </div>
+        </div>
+      </aside>
+
+      <article class="cs-article">
+        <section id="overview" class="cs-section">
+          <p class="micro">01 / CONCEPT & MOTIVATION</p>
+          <h2>The Problem: Heavy, Opaque Security Scanners</h2>
+          <p>Most commercial website security scanners operate behind strict paywalls, require intrusive software installations, or persist targets in long-term databases. Developers and system administrators simply configuring a production deployment needed a lightweight, zero-latency scanner to verify HTTP response hardening without third-party tracking.</p>
+          <p><strong>WafyShield</strong> was engineered as an automated, non-destructive reconnaissance utility. It inspects public protocol configurations, certificates, and perimeter response headers within milliseconds, outputting a quantifiable 100-point security assessment alongside remediation instructions.</p>
+        </section>
+
+        <section id="ssrf" class="cs-section">
+          <p class="micro">02 / NETWORK DEFENSE</p>
+          <h2>SSRF Prevention and Request Isolation</h2>
+          <p>Allowing users to submit arbitrary URLs to a serverless function introduces high risk of Server-Side Request Forgery (SSRF). Attackers frequently exploit scanner backends to probe private IP networks, loopback interfaces, or cloud metadata endpoints (e.g., 169.254.169.254).</p>
+          <div class="cs-grid-cards">
+            <div class="cs-card">
+              <h4>IP Range Filtering</h4>
+              <p>Strict regex enforcement blocks 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, link-local addresses, and .local domains prior to DNS resolution.</p>
+            </div>
+            <div class="cs-card">
+              <h4>Edge Rate Limiting</h4>
+              <p>Next.js Edge Middleware enforces IP-based sliding window restrictions (maximum 5 scans per minute) to eliminate denial-of-service abuse.</p>
+            </div>
+            <div class="cs-card">
+              <h4>Strict Abort Timeouts</h4>
+              <p>Network calls are wrapped inside an AbortController with a deterministic 9-second timeout to prevent Slowloris hanging states.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="engine" class="cs-section">
+          <p class="micro">03 / SYSTEM ARCHITECTURE</p>
+          <h2>Multi-Vector Inspection Engine</h2>
+          <p>When an authenticated scan request passes network sanitization, the backend initiates dual parallel operations: an HTTP/HTTPS header extraction pipeline and an encrypted Node.js TLS handshake.</p>
+          <ul>
+            <li><strong>TLS Certificate Analysis:</strong> Bypasses typical high-level HTTP wrappers by leveraging <code>tls.connect()</code> on port 443 with SNI support, extracting the peer certificate, validity lifecycle, issuer Common Name, and SHA-256 fingerprint.</li>
+            <li><strong>OWASP Security Headers:</strong> Dissects response headers for Strict-Transport-Security (HSTS), Content-Security-Policy (CSP), X-Frame-Options (Clickjacking defense), X-Content-Type-Options (MIME sniffing prevention), and Permissions-Policy.</li>
+            <li><strong>Cookie Hygiene Auditing:</strong> Extracts all Set-Cookie instances and asserts the presence of <code>Secure</code>, <code>HttpOnly</code>, and <code>SameSite</code> (Lax/Strict) flags to eliminate session hijacking and cross-site scripting risks.</li>
+          </ul>
+        </section>
+
+        <section id="scoring" class="cs-section">
+          <p class="micro">04 / ALGORITHM DESIGN</p>
+          <h2>Weighted Scoring & Zero-Persistence Storage</h2>
+          <p>Security metrics are evaluated using a deterministic weighting formula. Rather than binary pass/fail results, headers are assigned risk-proportional weight:</p>
+          <div class="cs-code-box">
+HTTPS Enforced: 20 pts | CSP: 15 pts | HSTS: 10 pts | XFO: 10 pts
+XCTO: 10 pts | Referrer-Policy: 10 pts | Permissions-Policy: 10 pts
+Cookie Secure: 5 pts | Cookie HttpOnly: 5 pts | Cookie SameSite: 5 pts
+Total Base: 100 Points (Categorized: Low, Medium, High, Critical)
+          </div>
+          <p>To uphold complete user privacy, no scanned URLs, telemetry logs, or diagnostic reports are stored in a database. Temporary in-memory caching (5-minute TTL) prevents redundant outbound network traffic, while persistent scan histories remain strictly inside the client's browser using <code>localStorage</code>.</p>
+        </section>
+
+        <section id="takeaways" class="cs-section">
+          <p class="micro">05 / RETROSPECTIVE</p>
+          <h2>Technical Challenges & Insights</h2>
+          <p>Handling diverse HTTP redirect variations proved complex. Servers frequently chain 301, 302, and 307 redirects across subdomains. Ensuring the TLS certificate inspector tracked the final canonical destination rather than initial intermediate nodes required explicit resolution synchronization.</p>
+          <p>The resulting architecture delivers enterprise-grade perimeter insight in a clean, developer-accessible web interface while guaranteeing complete client-side data sovereignty.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <span>WAFY LAB</span>
+    <span>BUILT TO EXPERIMENT</span>
+    <a href="https://afeemuhammodwafy.com/" target="_blank" rel="noopener">afeemuhammodwafy.com</a>
+  </footer>
+</body>
+</html>

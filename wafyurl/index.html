@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WafyURL — Case Study & Engineering Overview | Wafy Lab</title>
+  <meta name="description" content="Technical deep dive into WafyURL: A full-stack Python and Flask URL management platform featuring cryptographic access controls, dynamic QR generation, and real-time telemetry analytics.">
+  <link rel="canonical" href="https://amwafy.xyz/wafyurl">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b0b'/%3E%3Cpath d='M18 17h28v8H34v22h-9V25H18z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="../index.html" aria-label="Wafy Lab home">
+      <span>Wafy Lab</span>
+    </a>
+    <nav>
+      <a href="../index.html#builds">Builds</a>
+      <a href="../index.html#process">Process</a>
+      <a href="https://afeemuhammodwafy.com/" target="_blank" rel="noopener">Portfolio</a>
+    </nav>
+    <span class="status"><i></i> LAB ONLINE</span>
+  </header>
+
+  <main>
+    <section class="cs-header">
+      <a href="../index.html#builds" class="cs-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        Back to builds
+      </a>
+
+      <div class="cs-title-wrap">
+        <p class="kicker"><span>FULL-STACK SYSTEMS</span> / BUILD 02</p>
+        <h1>WafyURL</h1>
+        <p class="lede">A low-latency link redirection platform architected with Python, Flask, and relational analytics engines to handle time-decaying links, cryptographic gates, and live traffic logging.</p>
+      </div>
+
+      <div class="cs-meta-bar">
+        <span>DOMAIN: <strong>Link Infrastructure & Analytics</strong></span>
+        <span>ENGINE: <strong>Python / Flask / SQLAlchemy</strong></span>
+        <span>DATABASE: <strong>PostgreSQL & SQLite</strong></span>
+        <span>STATUS: <strong>Production Online</strong></span>
+
+        <div class="cs-btn-row">
+          <a href="https://url.amwafy.xyz/" target="_blank" rel="noopener" class="cs-btn primary">
+            Launch Service
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+          <a href="https://github.com/afeemuhammodwafy1" target="_blank" rel="noopener" class="cs-btn secondary">
+            Repository
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-hero-media">
+      <div class="cs-image-frame">
+        <img src="../assets/images/wafyurl.webp" alt="WafyURL Interface and Analytics System" loading="eager">
+      </div>
+    </section>
+
+    <div class="cs-body">
+      <aside class="cs-aside">
+        <div class="cs-aside-block">
+          <h4>Table of Contents</h4>
+          <ul class="cs-nav-list">
+            <li><a href="#overview">Problem & System Goals</a></li>
+            <li><a href="#schema">Relational Data Schema</a></li>
+            <li><a href="#routing">Routing & Fast Paths</a></li>
+            <li><a href="#security">Security & Gating</a></li>
+            <li><a href="#optimization">Scale & Edge Optimization</a></li>
+          </ul>
+        </div>
+
+        <div class="cs-aside-block">
+          <h4>Technologies Explored</h4>
+          <div class="cs-tag-cloud">
+            <span>Python 3.11</span>
+            <span>Flask Microframework</span>
+            <span>Flask-SQLAlchemy</span>
+            <span>PostgreSQL Pooling</span>
+            <span>OpenGraph Scraper</span>
+            <span>Chart.js Visuals</span>
+          </div>
+        </div>
+      </aside>
+
+      <article class="cs-article">
+        <section id="overview" class="cs-section">
+          <p class="micro">01 / ARCHITECTURAL GOALS</p>
+          <h2>High-Velocity Redirection with Telemetry</h2>
+          <p>Standard URL shorteners function merely as redirect proxies, disregarding granular request telemetry or link confidentiality. The technical goal of WafyURL was building an end-to-end management platform handling custom vanity slugs, automated OpenGraph metadata previews, time-based expiration, and cryptographic authentication prior to HTTP 302 redirection.</p>
+        </section>
+
+        <section id="schema" class="cs-section">
+          <p class="micro">02 / DATABASE DESIGN</p>
+          <h2>Relational Integrity & Partitioned Logs</h2>
+          <p>Redirection engines experience asymmetrical read-write loads. The relational schema separates static routing metadata from high-volume analytical write records.</p>
+          <div class="cs-grid-cards">
+            <div class="cs-card">
+              <h4>URL Entity Core</h4>
+              <p>Stores canonical destination, generated base-62 short code, optional vanity alias, expiration timestamps, and SHA-256 password digests with indexed lookups.</p>
+            </div>
+            <div class="cs-card">
+              <h4>ClickLog Analytics Store</h4>
+              <p>Captures client IP, referer domain sanitization, geographic country/city mapping via geo-IP lookup, and regex-based device/OS/browser fingerprinting.</p>
+            </div>
+            <div class="cs-card">
+              <h4>SiteStats Materialized Store</h4>
+              <p>Prevents exhaustive table scan aggregate computations on each landing page request through an atomic persistent state register.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="routing" class="cs-section">
+          <p class="micro">03 / APPLICATION LOGIC</p>
+          <h2>Shorthand Routing & Trailing-Plus Protocol</h2>
+          <p>To eliminate cumbersome dashboard navigation, WafyURL integrates an ergonomic telemetry route pattern. Appending a trailing <code>+</code> delimiter directly to any shortened slug bypasses the redirect engine and routes directly to the real-time analytics view for that specific entity.</p>
+        </section>
+
+        <section id="security" class="cs-section">
+          <p class="micro">04 / ACCESS CONTROL</p>
+          <h2>Cryptographic Link Shielding & Self-Destruction</h2>
+          <p>When link authors configure password protection, standard redirection is intercepted. The route serves an isolated unlock view. Passwords submitted over HTTPS are validated against stored SHA-256 hashes via constant-time comparison algorithms.</p>
+        </section>
+
+        <section id="optimization" class="cs-section">
+          <p class="micro">05 / INFRASTRUCTURE LESSONS</p>
+          <h2>Connection Pooling & Bot Handling</h2>
+          <p>Deploying WSGI containers under heavy asynchronous traffic highlighted database exhaustion bottlenecks. Adopting SQLAlchemy connection pooling with pre-ping validation (<code>pool_pre_ping=True</code>) and automatic connection recycling resolved pool timeouts during burst traffic.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <span>WAFY LAB</span>
+    <span>BUILT TO EXPERIMENT</span>
+    <a href="https://afeemuhammodwafy.com/" target="_blank" rel="noopener">afeemuhammodwafy.com</a>
+  </footer>
+</body>
+</html>
