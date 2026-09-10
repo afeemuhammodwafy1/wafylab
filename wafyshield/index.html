@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WafyShield — Case Study & Technical Architecture | Wafy Lab</title>
   <meta name="description" content="Technical case study of WafyShield: A serverless zero-database web security scanner inspecting HTTPS, OWASP security headers, and cookie attributes.">
-  <link rel="canonical" href="https://amwafy.xyz/wafyshield">
+  <link rel="canonical" href="https://amwafy.xyz/wafyshield/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b0b'/%3E%3Cpath d='M18 17h28v8H34v22h-9V25H18z' fill='white'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -43,8 +43,6 @@
       <div class="cs-meta-bar">
         <span>DOMAIN: <strong>Web Security</strong></span>
         <span>ENGINE: <strong>Next.js / Node TLS</strong></span>
-        <span>HOSTING: <strong>Vercel Serverless</strong></span>
-        <span>TIMELINE: <strong>2025 – 2026</strong></span>
 
         <div class="cs-btn-row">
           <a href="https://shield.amwafy.xyz/" target="_blank" rel="noopener" class="cs-btn primary">
@@ -61,7 +59,7 @@
 
     <section class="cs-hero-media">
       <div class="cs-image-frame">
-        <img src="../assets/images/wafyshield.webp" alt="WafyShield Security Scanner Dashboard and Interface" loading="eager">
+        <img src="/assets/images/wafyshield.webp" alt="WafyShield Security Scanner Dashboard and Interface" loading="eager">
       </div>
     </section>
 
@@ -102,7 +100,7 @@
         <section id="ssrf" class="cs-section">
           <p class="micro">02 / NETWORK DEFENSE</p>
           <h2>SSRF Prevention and Request Isolation</h2>
-          <p>Allowing users to submit arbitrary URLs to a serverless function introduces high risk of Server-Side Request Forgery (SSRF). Attackers frequently exploit scanner backends to probe private IP networks, loopback interfaces, or cloud metadata endpoints (e.g., 169.254.169.254).</p>
+          <p>Allowing users to submit arbitrary URLs to a serverless function introduces high risk of Server-Side Request Forgery (SSRF). Attackers frequently exploit scanner backends to probe private IP networks, loopback interfaces, or cloud metadata endpoints.</p>
           <div class="cs-grid-cards">
             <div class="cs-card">
               <h4>IP Range Filtering</h4>
